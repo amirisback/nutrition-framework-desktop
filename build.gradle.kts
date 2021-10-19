@@ -10,18 +10,20 @@ plugins {
 group = "com.frogobox"
 version = "1.0"
 
+tasks.withType<KotlinCompile>() {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+}
+
 repositories {
     google()
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
     implementation(compose.desktop.currentOs)
-}
-
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
+    implementation("com.github.amirisback.nutrition-framework:nutritioncore:0.0.2-alpha04")
 }
 
 compose.desktop {
