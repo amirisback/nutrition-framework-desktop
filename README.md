@@ -15,22 +15,28 @@ What's New??
 
     * Consumer Framework *
 
+## Application Framework
+![ScreenShoot Apps](docs/image/skeleton-component.png?raw=true)
+
 ## Documentation
+- SK TA [Click Here](https://github.com/amirisback/nutrition-framework/raw/master/docs/bundle/Muhammad%20Faisal%20Amir_1301198497_SK_TA.pdf)
+- General [Click Here](https://github.com/amirisback/nutrition-framework/tree/master/docs)
+- Bundle [Click Here](https://github.com/amirisback/nutrition-framework/tree/master/docs/bundle)
 - Guide [Click Here](https://github.com/amirisback/nutrition-framework/tree/master/docs/guide)
-- Journal [Click Here](https://github.com/amirisback/nutrition-framework/tree/master/docs/journal)
+- Journal List [Click Here](https://github.com/amirisback/nutrition-framework/tree/master/docs/journal)
 - Theory [Click Here](https://github.com/amirisback/nutrition-framework/tree/master/docs/theory)
-- Proposal [Click Here](https://github.com/amirisback/nutrition-framework/tree/master/docs)
+- Proposal [Click Here](https://github.com/amirisback/nutrition-framework/tree/master/docs/proposal)
 - Guidance [Click Here](https://github.com/amirisback/nutrition-framework/tree/master/docs/guidance)
 - Image [Click Here](https://github.com/amirisback/nutrition-framework/tree/master/docs/image)
-- Slide Seminar Proposal [Click Here](https://docs.google.com/presentation/d/1TbJjrjXdieSdqo_dSz0N_umAgeT6euGOWp-nYOHS3g8/edit?usp=sharing)
-- Design, Flowchart on Figma [Click Here](https://www.figma.com/file/Ons8XY0YvxecwC71Aa92Qj/TA?node-id=0%3A1)
+- Design on Figma [Click Here](https://www.figma.com/file/Ons8XY0YvxecwC71Aa92Qj/TA?node-id=0%3A1)
 - Sheet Feedback [Click Here](https://docs.google.com/spreadsheets/d/1P8U2lu8odQJwLPD3QiSJGJXAgocdc_H5j7PdT23lPZc/edit#gid=0)
-- Record Revision [Click Here](https://github.com/amirisback/nutrition-framework/tree/master/docs/record)
-- SK TA [Click Here](https://github.com/amirisback/nutrition-framework/raw/master/docs/Muhammad%20Faisal%20Amir_1301198497_SK_TA.pdf)
+- Diagram on Draw Io [Click Here](https://drive.google.com/file/d/1OCsoqVV3UYnLxpUK9jYm2yNjcFj9sUPP/view?usp=sharing)
+- Research Nutrition Apps [Click Here](https://docs.google.com/spreadsheets/d/1t0aWoMrBEVfeZTIV438V8P0YMeGUK2VV_HHC7qnZUtU/edit?usp=sharing)
+- Final Task [Click Here](https://github.com/amirisback/nutrition-framework/raw/master/docs/Muhammad%20Faisal%20Amir_1301198497_TUGAS_AKHIR.docx)
 
 ## Telkom University Lecturers
 - Dana Sulistyo Kusumo, S.T., M.T., PhD. - danakusumo@telkomuniversity.ac.id
-- Shinta Yulia Puspitasari, S.T., M.T.
+- Shinta Yulia Puspitasari, S.T., M.T. - shintayulia@telkomuniversity.ac.id
 
 ## Tech-stack
 -   [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)  - managing background threads with simplified code and reducing needs for callbacks.

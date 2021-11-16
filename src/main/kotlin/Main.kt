@@ -11,13 +11,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.frogobox.api.news.util.NewsConstant.CATEGORY_HEALTH
-import com.frogobox.api.news.util.NewsConstant.COUNTRY_ID
-import com.frogobox.api.news.util.NewsUrl
-import com.frogobox.nutritioncore.ConsumeNewsApi
 import com.frogobox.nutritioncore.core.NutriResponse
-import com.frogobox.nutritioncore.model.Article
-import com.frogobox.nutritioncore.model.ArticleResponse
+import com.frogobox.nutritioncore.method.function.ConsumeNewsApi
+import com.frogobox.nutritioncore.model.news.Article
+import com.frogobox.nutritioncore.model.news.ArticleResponse
+import com.frogobox.nutritioncore.util.news.NewsConstant.CATEGORY_HEALTH
+import com.frogobox.nutritioncore.util.news.NewsConstant.COUNTRY_ID
+import com.frogobox.nutritioncore.util.news.NewsUrl
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @Composable
 @Preview
@@ -34,45 +37,49 @@ fun main() = application {
 }
 
 
+@OptIn(DelicateCoroutinesApi::class)
 @Composable
 fun RecyclerView() {
 
     var newsState : List<Article> by remember { mutableStateOf(emptyList()) }
 
     val consumeNewsApi = ConsumeNewsApi(NewsUrl.API_KEY) // Your API_KEY
-    consumeNewsApi.getTopHeadline( // Adding Base Parameter on main function
-        null,
-        null,
-        CATEGORY_HEALTH,
-        COUNTRY_ID,
-        null,
-        null,
-        object : NutriResponse.DataResponse<ArticleResponse> {
-            override fun onSuccess(data: ArticleResponse) {
-                for (i in data.articles?.indices!!) {
-                    println("${i + 1}.\t ${data.articles?.get(i)?.title}")
+
+    GlobalScope.launch {
+        consumeNewsApi.getTopHeadline( // Adding Base Parameter on main function
+            null,
+            null,
+            CATEGORY_HEALTH,
+            COUNTRY_ID,
+            null,
+            null,
+            object : NutriResponse.DataResponse<ArticleResponse> {
+                override fun onSuccess(data: ArticleResponse) {
+                    for (i in data.articles?.indices!!) {
+                        println("${i + 1}.\t ${data.articles?.get(i)?.title}")
+                    }
+                    newsState = data.articles!!
                 }
-                newsState = data.articles!!
-            }
 
-            override fun onFailed(statusCode: Int, errorMessage: String?) {
-                // Your failed to do
-            }
+                override fun onFailed(statusCode: Int, errorMessage: String?) {
+                    // Your failed to do
+                }
 
-            override fun onShowProgress() {
-                // Your Progress Show
-                println("Show Progress")
-            }
+                override fun onShowProgress() {
+                    // Your Progress Show
+                    println("Show Progress")
+                }
 
-            override fun onHideProgress() {
-                // Your Progress Hide
-                println("Hide Progress")
-            }
+                override fun onHideProgress() {
+                    // Your Progress Hide
+                    println("Hide Progress")
+                }
 
-            override fun onEmpty() {
-            }
+                override fun onEmpty() {
+                }
 
-        })
+            })
+    }
 
     LazyColumn {
         items(newsState.size) { index ->
