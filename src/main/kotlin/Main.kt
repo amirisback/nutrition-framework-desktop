@@ -1,9 +1,7 @@
 // Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 import androidx.compose.desktop.DesktopMaterialTheme
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -11,6 +9,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.frogobox.nutritioncore.compose.ui.nutri_dimen_16dp
+import com.frogobox.nutritioncore.compose.widget.NutriLazyColumn
+import com.frogobox.nutritioncore.compose.widget.NutriListType1
 import com.frogobox.nutritioncore.core.NutriResponse
 import com.frogobox.nutritioncore.method.function.ConsumeNewsApi
 import com.frogobox.nutritioncore.model.news.Article
@@ -41,7 +42,7 @@ fun main() = application {
 @Composable
 fun RecyclerView() {
 
-    var newsState : List<Article> by remember { mutableStateOf(emptyList()) }
+    var newsState: List<Article> by remember { mutableStateOf(emptyList()) }
 
     val consumeNewsApi = ConsumeNewsApi(NewsUrl.API_KEY) // Your API_KEY
 
@@ -81,9 +82,14 @@ fun RecyclerView() {
             })
     }
 
-    LazyColumn {
-        items(newsState.size) { index ->
-            newsState[index].title?.let { Text("${index + 1}.\t\t $it") }
+    NutriLazyColumn(
+        data = newsState,
+        contentPadding = PaddingValues(bottom = nutri_dimen_16dp)
+    ) {
+        it.title?.let { it1 ->
+            NutriListType1(
+                it1
+            )
         }
     }
 

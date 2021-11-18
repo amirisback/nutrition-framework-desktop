@@ -15,6 +15,10 @@ What's New??
 
     * Consumer Framework *
 
+## Screen Shot Temporary
+![ScreenShoot Apps](docs/image/ss_1.png?raw=true)
+
+
 ## Application Framework
 ![ScreenShoot Apps](docs/image/skeleton-component.png?raw=true)
 
