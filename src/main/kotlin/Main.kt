@@ -7,8 +7,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
+import androidx.compose.ui.window.rememberWindowState
 import com.frogobox.nutritioncore.compose.ui.nutri_dimen_16dp
 import com.frogobox.nutritioncore.compose.widget.NutriLazyColumn
 import com.frogobox.nutritioncore.compose.widget.NutriListType1
@@ -32,7 +36,15 @@ fun App() {
 }
 
 fun main() = application {
-    Window(onCloseRequest = ::exitApplication) {
+    Window(
+        title = "Nutrition Framework",
+        onCloseRequest = ::exitApplication,
+        state = rememberWindowState(
+            width = 900.dp,
+            height = 1000.dp,
+            position = WindowPosition(alignment = Alignment.Center)
+        )
+    ) {
         App()
     }
 }
