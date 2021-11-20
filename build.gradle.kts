@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    implementation("com.github.amirisback.nutrition-framework:nutritioncore:0.0.2-alpha09")
+    implementation("com.github.amirisback.nutrition-framework:nutritioncore:0.0.2-alpha10")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt")
 }
 
