@@ -1,11 +1,8 @@
 // Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-import androidx.annotation.DrawableRes
-import androidx.compose.desktop.DesktopMaterialTheme
+
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,21 +19,11 @@ import com.frogobox.nutritioncore.core.NutriResponse
 import com.frogobox.nutritioncore.method.function.ConsumeNewsApi
 import com.frogobox.nutritioncore.model.news.Article
 import com.frogobox.nutritioncore.model.news.ArticleResponse
-import com.frogobox.nutritioncore.util.news.NewsConstant.CATEGORY_HEALTH
 import com.frogobox.nutritioncore.util.news.NewsConstant.COUNTRY_ID
 import com.frogobox.nutritioncore.util.news.NewsUrl
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
-import com.frogobox.nutritioncore.compose.ui.nutri_dimen_8dp
-import org.jetbrains.skia.Image
-import java.io.ByteArrayOutputStream
-import java.net.HttpURLConnection
-import java.net.URL
-import javax.imageio.ImageIO
-
 
 @Composable
 @Preview
@@ -61,7 +48,7 @@ fun main() = application {
 }
 
 
-@OptIn(DelicateCoroutinesApi::class)
+@OptIn(DelicateCoroutinesApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun SetupUI() {
 
@@ -133,15 +120,16 @@ fun SetupUI() {
                     }
                 }
             }
-            NutriLazyColumn(
+            NutriLazyFixedGrid(
                 data = dataState,
+                spanCount = 2,
                 contentPadding = PaddingValues(bottom = nutri_dimen_16dp)
             ) {
                 it.title?.let { it1 ->
                     it.author?.let { it2 ->
                         it.content?.let { it3 ->
                             it.urlToImage?.let { it4 ->
-                                NutriListType11(
+                                NutriGridType3(
                                     it4,
                                     it1,
                                     it2,
