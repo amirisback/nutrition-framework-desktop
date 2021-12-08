@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.5.31"
-    id("org.jetbrains.compose") version "1.0.0-rc3"
+    id("org.jetbrains.compose") version "1.0.0"
 }
 
 group = "com.frogobox"
@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    implementation("com.github.amirisback.nutrition-framework:nutritioncore:0.0.2-beta01")
+    implementation("com.github.amirisback.nutrition-framework:nutritioncore:0.0.2-beta03")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt")
 }
 

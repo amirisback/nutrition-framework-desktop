@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 @Preview
 fun App() {
     MaterialTheme {
-        SetupUI()
+        requestData()
     }
 }
 
@@ -47,14 +47,10 @@ fun main() = application {
     }
 }
 
-
-@OptIn(DelicateCoroutinesApi::class, ExperimentalFoundationApi::class)
 @Composable
-fun SetupUI() {
-
+fun requestData() {
     var dataState: List<Article> by remember { mutableStateOf(emptyList()) }
     var progressState: Boolean by remember { mutableStateOf(false) }
-
     val consumeNewsApi = ConsumeNewsApi(NewsUrl.API_KEY) // Your API_KEY
     GlobalScope.launch {
         consumeNewsApi.getEverythings( // Adding Base Parameter on main function
@@ -100,6 +96,13 @@ fun SetupUI() {
             })
     }
 
+    SetupUI(dataState)
+
+}
+
+@OptIn(DelicateCoroutinesApi::class, ExperimentalFoundationApi::class)
+@Composable
+fun SetupUI(dataState: List<Article>) {
     Column {
         NutriSimpleTopAppBar("Nutrition Framework Development", nutri_dimen_0dp)
         Row(horizontalArrangement = Arrangement.SpaceEvenly) {
@@ -143,5 +146,4 @@ fun SetupUI() {
 
         }
     }
-
 }
