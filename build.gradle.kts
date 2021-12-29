@@ -25,9 +25,11 @@ dependencies {
     implementation(compose.desktop.currentOs)
 
     // Ini adalah hasil implementasi dari nutrition framework
-    implementation("com.github.amirisback.nutrition-framework:nutritioncore:0.0.2-beta03")
+    implementation("com.github.amirisback.nutrition-framework:nutritioncore:1.0.0-beta01")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt")
+
+    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
 }
 
 compose.desktop {

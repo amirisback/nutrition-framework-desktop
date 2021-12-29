@@ -15,21 +15,17 @@ import androidx.compose.ui.window.rememberWindowState
 import com.frogobox.nutritioncore.compose.ui.nutri_dimen_0dp
 import com.frogobox.nutritioncore.compose.ui.nutri_dimen_16dp
 import com.frogobox.nutritioncore.compose.widget.*
-import com.frogobox.nutritioncore.core.NutriResponse
-import com.frogobox.nutritioncore.method.function.ConsumeNewsApi
 import com.frogobox.nutritioncore.model.news.Article
 import com.frogobox.nutritioncore.model.news.ArticleResponse
+import com.frogobox.nutritioncore.sources.NutriResponse
 import com.frogobox.nutritioncore.util.news.NewsConstant.COUNTRY_ID
 import com.frogobox.nutritioncore.util.news.NewsUrl
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
-        requestData()
+        SetupUI()
     }
 }
 
@@ -47,74 +43,38 @@ fun main() = application {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun requestData() {
-    var dataState: List<Article> by remember { mutableStateOf(emptyList()) }
-    var progressState: Boolean by remember { mutableStateOf(false) }
-    val consumeNewsApi = ConsumeNewsApi(NewsUrl.API_KEY) // Your API_KEY
-    GlobalScope.launch {
-        consumeNewsApi.getEverythings( // Adding Base Parameter on main function
-            "Nutrisi",
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            COUNTRY_ID,
-            null,
-            null,
-            null,
-            object : NutriResponse.DataResponse<ArticleResponse> {
-                override fun onSuccess(data: ArticleResponse) {
-                    for (i in data.articles?.indices!!) {
-                        println("${i + 1}.\t ${data.articles?.get(i)?.title}")
-                        println("${i + 1}.\t ${data.articles?.get(i)?.urlToImage}")
+fun SetupRvComponent(dataState: List<Article>) {
+    Row(horizontalArrangement = Arrangement.SpaceEvenly) {
+        NutriLazyColumn(
+            data = dataState,
+            modifier = Modifier.width(300.dp).fillMaxHeight(),
+            contentPadding = PaddingValues(bottom = nutri_dimen_16dp)
+        ) {
+            it.title?.let { it1 ->
+                it.author?.let { it2 ->
+                    it.content?.let { it3 ->
+                        NutriListType3(
+                            it1,
+                            it2,
+                            it3
+                        )
                     }
-                    dataState = data.articles!!
                 }
-
-                override fun onFailed(statusCode: Int, errorMessage: String?) {
-                    // Your failed to do
-                }
-
-                override fun onShowProgress() {
-                    // Your Progress Show
-                    println("Show Progress")
-                    progressState = true
-                }
-
-                override fun onHideProgress() {
-                    // Your Progress Hide
-                    println("Hide Progress")
-                    progressState = false
-                }
-
-                override fun onEmpty() {
-                }
-
-            })
-    }
-
-    SetupUI(dataState)
-
-}
-
-@OptIn(DelicateCoroutinesApi::class, ExperimentalFoundationApi::class)
-@Composable
-fun SetupUI(dataState: List<Article>) {
-    Column {
-        NutriSimpleTopAppBar("Nutrition Framework Development", nutri_dimen_0dp)
-        Row(horizontalArrangement = Arrangement.SpaceEvenly) {
-            NutriLazyColumn(
-                data = dataState,
-                modifier = Modifier.width(300.dp).fillMaxHeight(),
-                contentPadding = PaddingValues(bottom = nutri_dimen_16dp)
-            ) {
-                it.title?.let { it1 ->
-                    it.author?.let { it2 ->
-                        it.content?.let { it3 ->
-                            NutriListType3(
+            }
+        }
+        NutriLazyFixedGrid(
+            data = dataState,
+            spanCount = 2,
+            contentPadding = PaddingValues(bottom = nutri_dimen_16dp)
+        ) {
+            it.title?.let { it1 ->
+                it.author?.let { it2 ->
+                    it.content?.let { it3 ->
+                        it.urlToImage?.let { it4 ->
+                            NutriGridType3(
+                                it4,
                                 it1,
                                 it2,
                                 it3
@@ -123,27 +83,69 @@ fun SetupUI(dataState: List<Article>) {
                     }
                 }
             }
-            NutriLazyFixedGrid(
-                data = dataState,
-                spanCount = 2,
-                contentPadding = PaddingValues(bottom = nutri_dimen_16dp)
-            ) {
-                it.title?.let { it1 ->
-                    it.author?.let { it2 ->
-                        it.content?.let { it3 ->
-                            it.urlToImage?.let { it4 ->
-                                NutriGridType3(
-                                    it4,
-                                    it1,
-                                    it2,
-                                    it3
-                                )
-                            }
-                        }
-                    }
+        }
+
+    }
+}
+
+@Composable
+fun SetupUI() {
+
+    var dataState: List<Article> by remember { mutableStateOf(emptyList()) }
+    var progressState: Boolean by remember { mutableStateOf(false) }
+
+    val consumeNewsApi = Consume(NewsUrl.API_KEY) // Your API_KEY
+    consumeNewsApi.getEverythings( // Adding Base Parameter on main function
+        "Nutrisi",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        COUNTRY_ID,
+        null,
+        null,
+        null,
+        object : NutriResponse.DataResponse<ArticleResponse> {
+            override fun onSuccess(data: ArticleResponse) {
+                for (i in data.articles?.indices!!) {
+                    println("${i + 1}.\t ${data.articles?.get(i)?.title}")
+                    println("${i + 1}.\t ${data.articles?.get(i)?.urlToImage}")
                 }
+                dataState = data.articles!!
             }
 
+            override fun onFailed(statusCode: Int, errorMessage: String?) {
+                // Your failed to do
+            }
+
+            override fun onShowProgress() {
+                // Your Progress Show
+                println("Show Progress")
+                progressState = true
+            }
+
+            override fun onHideProgress() {
+                // Your Progress Hide
+                println("Hide Progress")
+                progressState = false
+            }
+
+            override fun onEmpty() {
+            }
+
+        })
+
+
+    Column {
+        NutriSimpleTopAppBar("Nutrition Framework Development", nutri_dimen_0dp)
+
+        if (progressState) {
+            NutriCircularProgressIndicator()
+        } else {
+            SetupRvComponent(dataState)
         }
+
     }
 }
