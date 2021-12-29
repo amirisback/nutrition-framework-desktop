@@ -1,3 +1,5 @@
+package nutritiondesktop
+
 import com.frogobox.nutritioncore.model.news.ArticleResponse
 import com.frogobox.nutritioncore.model.news.SourceResponse
 import com.frogobox.nutritioncore.sources.NutriApiClient

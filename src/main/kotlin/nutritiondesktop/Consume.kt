@@ -1,3 +1,5 @@
+package nutritiondesktop
+
 import com.frogobox.nutritioncore.method.interfaces.IConsumeNewsApi
 import com.frogobox.nutritioncore.model.news.ArticleResponse
 import com.frogobox.nutritioncore.model.news.SourceResponse
@@ -18,8 +20,6 @@ import com.frogobox.nutritioncore.sources.NutriResponse
 
 class Consume(private val apiKey: String) : IConsumeNewsApi {
 
-    private val newsRepository = Repository
-
     override fun getTopHeadline(
         q: String?,
         sources: String?,
@@ -29,7 +29,7 @@ class Consume(private val apiKey: String) : IConsumeNewsApi {
         page: Int?,
         callback: NutriResponse.DataResponse<ArticleResponse>
     ) {
-        newsRepository.getTopHeadline(
+        Repository.getTopHeadline(
             apiKey,
             q,
             sources,
@@ -55,7 +55,7 @@ class Consume(private val apiKey: String) : IConsumeNewsApi {
         page: Int?,
         callback: NutriResponse.DataResponse<ArticleResponse>
     ) {
-        newsRepository.getEverythings(
+        Repository.getEverythings(
             apiKey,
             q,
             from,
@@ -78,7 +78,7 @@ class Consume(private val apiKey: String) : IConsumeNewsApi {
         category: String,
         callback: NutriResponse.DataResponse<SourceResponse>
     ) {
-        newsRepository.getSources(
+        Repository.getSources(
             apiKey,
             language,
             country,

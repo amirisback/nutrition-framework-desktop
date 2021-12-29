@@ -1,4 +1,4 @@
-// Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+package nutritiondesktop// Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -95,7 +95,7 @@ fun SetupUI() {
     var progressState: Boolean by remember { mutableStateOf(false) }
 
     val consumeNewsApi = Consume(NewsUrl.API_KEY) // Your API_KEY
-    consumeNewsApi.getEverythings( // Adding Base Parameter on main function
+    consumeNewsApi.getEverythings( // Adding Base Parameter on nutritiondesktop.main function
         "Nutrisi",
         null,
         null,
