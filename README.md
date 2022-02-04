@@ -20,7 +20,7 @@ What's New??
 
 
 ## Application Framework
-![ScreenShoot Apps](docs/image/skeleton-component.png?raw=true)
+![ScreenShoot Apps](https://raw.githubusercontent.com/amirisback/nutrition-framework/master/docs/image/skeleton-component.png?raw=true)
 
 ## Documentation
 - SK TA [Click Here](https://github.com/amirisback/nutrition-framework/raw/master/docs/bundle/Muhammad%20Faisal%20Amir_1301198497_SK_TA.pdf)
